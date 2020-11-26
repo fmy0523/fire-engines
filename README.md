@@ -1,25 +1,26 @@
-# README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
 # fireengine
+
+## サイト概要
+好きな消防車の写真を投稿するサイト。
+
+### サイトテーマ
+好きな消防車を投稿して利用者に見てもらう。また、他の利用者の投稿で様々な消防車を見る事ができる。
+
+### テーマを選んだ理由
+消防職員として勤務している中で、一般市民の方が消防車の写真を撮影している光景をよく見ます。また、中には消防マニアの人もいるので、そのような方達が自分達が好きな消防車の写真などを投稿して、消防が好きな人達で交流ができる場があればと考え、このサイトを作ろうと思いました。
+
+### ターゲットユーザ
+消防車が好きな人。
+
+### 主な利用シーン
+消防車の写真を撮影した時。
+
+
+### 機能一覧
+https://docs.google.com/spreadsheets/d/1BZ_ptby_ztl6pb5Ox_biWDhkjKCcMvaCLWr8D8Vfq0Y/edit#gid=636055962
+
+## 開発環境
+- OS：Linux(CentOS)
+- 言語：HTML,CSS,Ruby
+- フレームワーク：Ruby on Rails
+- 仮想環境：Vagrant
