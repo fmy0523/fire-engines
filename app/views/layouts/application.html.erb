@@ -22,25 +22,25 @@
                 <% if user_signed_in? %>
                 <!-- ログイン済みの場合 -->
                   <li>
-
+                    <%= link_to user_path(current_user) do %>
                     <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
-                    Home
-
+                    マイページ
+                    <% end %>
                   </li>
 
 
                   <li>
-
+                    <%= link_to fire_engines_path do %>
                     <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                    Users
-
+                    投稿一覧
+                    <% end %>
                   </li>
 
                   <li>
-
+                    <%= link_to new_fire_engine_path do %>
                     <span class="glyphicon glyphicon-book" aria-hidden="true"></span>
-                    Books
-
+                    新規投稿
+                    <% end %>
                   </li>
 
                   <li>

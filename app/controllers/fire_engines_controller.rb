@@ -12,11 +12,12 @@ class FireEnginesController < ApplicationController
   end
 
   def index
-  	@fire_engines = FireEngine.all
+  	@fire_engines = FireEngine.page(params[:page]).reverse_order
   end
 
   def show
   	@fire_engine = FireEngine.find(params[:id])
+  	@post_comment = PostComment.new
   end
 
   private

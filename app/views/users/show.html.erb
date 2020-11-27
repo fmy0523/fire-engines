@@ -1,4 +1,12 @@
-<p>投稿一覧</p>
+<h1>マイページ</h1>
+
+<div class="profile-container">
+  <h3 class="profile-name"><%= @user.name %></h3>
+  <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "no_image.png" %>
+  <% if @user.id == current_user.id %>
+    <p><%= link_to "プロフィール編集", edit_user_path(@user), class: "pull-right" %></p>
+  <% end %>
+</div>
 
 <div class="masonry-gutter"></div>
           <% @fire_engines.each do |fire_engine| %>
@@ -7,7 +15,7 @@
                 <div class="block-image">
                   <div class="view view-first">
                   	<%= link_to fire_engine_path(fire_engine.id) do %>
-                      <%= attachment_image_tag fire_engine, :image, :fill, 200, 200, format: 'jpeg' %>
+                      <%= attachment_image_tag fire_engine, :image %>
                     <% end %>
                   </div>
                 </div>
@@ -24,16 +32,6 @@
                   <ul class="inline-meta">
                     <li>By
                       <%= fire_engine.user.name %>
-                      <!-- コメントいいね機能実装後にプロフィール画像やる -->
-
-                      <!-- コメント件数の表示 -->
-                      <ul class="inline-meta">
-                        <li>
-                          <%= link_to "#{fire_engine.post_comments.count} コメント", fire_engine_path(fire_engine.id) %>
-                        </li>
-                      </ul>
-
-
                     </li>
                   </ul>
                 </div>
@@ -41,4 +39,3 @@
             </div>
           <% end %>
         </div>
-        <%= paginate @fire_engines %>
