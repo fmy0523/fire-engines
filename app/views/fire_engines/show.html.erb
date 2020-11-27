@@ -20,4 +20,39 @@
       <div class="post-content-inner mt-20">
         <p><%= @fire_engine.caption %></p>
       </div>
-    </div>
+            <!-- コメント件数 -->
+      <div class="comment-list bt style-2" id="comments">
+        <div class="float-wrapper">
+          <h2 class="comment-count"><%= @fire_engine.post_comments.count %>件コメント</h2>
+        </div>
+
+         <!-- コメント本文 -->
+     <ol>
+       <% @fire_engine.post_comments.each do |fire_engine| %>
+         <li class="comment">
+           <div class="comment-body bb">
+              <!-- ここにコメントしたユーザーのプロフィール画像を表示させる -->
+             <div class="comment-text">
+               <div class="comment-author clearfix">
+                 <a href="#" class="link-author"><%= fire_engine.user.name %></a>
+                   <!-- コメントの日付入れる -->
+               </div>
+               <div class="comment-entry"><%= fire_engine.comment %></div>
+               <!-- コメントしたものがログインユーザーのものであれば削除ボタンをここに表示 -->
+             　</div>
+           </div>
+         </li>
+       <% end %>
+     </ol>
+
+     <!-- コメント入力フォーム -->
+    <%= form_for [@fire_engine, @post_comment] do |f| %>
+      <div class="row">
+        <div class="col-sm-12">
+          <%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントをここに" %>
+        </div>
+      </div>
+      <%= f.submit "送信する", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
+    <% end %>
+
+  </div>
