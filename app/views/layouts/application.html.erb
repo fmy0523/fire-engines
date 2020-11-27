@@ -7,9 +7,89 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
 
-  <body>
-    <%= yield %>
-  </body>
+　　<!-- ヘッダー -->
+
+<div class="container">
+  <div class="row header">
+    <nav class="navbar navbar-inverse">
+      <div class="col-lg-6">
+        <h4>Fireengine</h4>
+      </div>
+      <div class="col-lg-6">
+        <div id="slidemenu">
+          <ul class="nav navbar-nav navbar-right" data-hover="dropdown" data-animations="zoomIn fadeIn fadeInUp fadeIn">
+                <% if user_signed_in? %>
+                <!-- ログイン済みの場合 -->
+                  <li>
+
+                    <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+                    Home
+
+                  </li>
+
+
+                  <li>
+
+                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                    Users
+
+                  </li>
+
+                  <li>
+
+                    <span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+                    Books
+
+                  </li>
+
+                  <li>
+                    <%= link_to destroy_user_session_path, method: :delete do %>
+                    <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+                    logout
+                    <% end %>
+                  </li>
+
+                <% else %>
+                   <!-- ログインしていない場合 -->
+                  <li>
+
+                    <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+                    Home
+
+                  </li>
+
+                   <li>
+
+                    <span class="glyphicon glyphicon-link" aria-hidden="true"></span>
+                    About
+
+                  </li>
+
+                  <li>
+                    <%= link_to new_user_registration_path do %>
+                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                    sign up
+                    <% end %>
+                  </li>
+
+                  <li>
+                    <%= link_to new_user_session_path do %>
+                    <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
+                    login
+                    <% end %>
+                  </li>
+
+                <% end %>
+             </ul>
+         </div>
+       </div>
+       </nav>
+    </div>
+</div>
+
+<body>
+ <%= yield %>
+</body>
+
 </html>

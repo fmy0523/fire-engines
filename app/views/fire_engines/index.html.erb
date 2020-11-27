@@ -1,0 +1,33 @@
+<p>投稿一覧</p>
+
+<div class="masonry-gutter"></div>
+          <% @fire_engines.each do |fire_engine| %>
+            <div class="masonry-block">
+              <div class="block block-image v1">
+                <div class="block-image">
+                  <div class="view view-first">
+                  	<%= link_to fire_engine_path(fire_engine.id) do %>
+                      <%= attachment_image_tag fire_engine, :image %>
+                    <% end %>
+                  </div>
+                </div>
+
+                <div class="block-content">
+
+                  <h3 class="block-title">
+                    <%= link_to fire_engine_path(fire_engine.id) do %>
+                      <i class="fa fa-map-marker"></i><%= fire_engine.fireengine_name %>
+                    <% end %>
+                  </h3>
+
+                  <p><%= fire_engine.caption %></p>
+                  <ul class="inline-meta">
+                    <li>By
+                      <%= fire_engine.user.name %>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
