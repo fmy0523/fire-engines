@@ -1,0 +1,23 @@
+<p>投稿詳細</p>
+
+
+      <div class="post-image">
+        <%= attachment_image_tag @fire_engine, :image %>
+      </div>
+
+    <div class="post-content">
+      <h2 class="post-title"><%= @fire_engine.fireengine_name %></h2>
+      <ul class="meta-info-cells v4 float-wrapper">
+        <li>
+          <i class="fa fa-user"></i>By<a href="#">
+            <%= @fire_engine.user.name %></a>
+        </li>
+        <li>
+          <i class="fa fa-calendar"></i><%= @fire_engine.created_at.strftime('%Y/%m/%d') %>
+        </li>
+      </ul>
+
+      <div class="post-content-inner mt-20">
+        <p><%= @fire_engine.caption %></p>
+      </div>
+    </div>
