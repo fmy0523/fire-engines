@@ -1,0 +1,14 @@
+<% if flash[:notice] %>
+  <p><%= flash[:notice] %></p>
+<% end %>
+
+<div class="container">
+  <h1>welcome to <strong>Fire engines</strong>  !!</h1>
+
+    <p>in<strong>Fire engines,</strong>  （何ができるか書く）!</p>
+
+
+    <%= link_to "Log in", new_user_session_path %>
+
+    <%= link_to "Sign up", new_user_registration_path %>
+</div>

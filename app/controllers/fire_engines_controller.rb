@@ -1,5 +1,8 @@
 class FireEnginesController < ApplicationController
 
+  # ログインしていない状態でアクセスされた場合は、ログイン画面へリダイレクト
+  before_action :authenticate_user!
+
   def new
   	@fire_engine = FireEngine.new
   end

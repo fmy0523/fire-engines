@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
-  get 'users/show'
-  devise_for :users
-  # ログイン後投稿一覧画面へ
-  root 'fire_engines#index'
 
-  resources :fire_engines, only: [:new, :create, :index, :show, :destroy, :edit, :update] do
+  root 'homes#top'
+
+  devise_for :users
+  get 'home/about' => 'homes#about'
+
+  resources :fire_engines do
     resources :post_comments, only: [:create, :destroy]
   end
 
