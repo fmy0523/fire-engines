@@ -1,3 +1,8 @@
+<% if flash[:notice] %>
+  <p><%= flash[:notice] %></p>
+<% end %>
+
+
 <h1>マイページ</h1>
 
 <div class="profile-container">
@@ -15,7 +20,7 @@
                 <div class="block-image">
                   <div class="view view-first">
                   	<%= link_to fire_engine_path(fire_engine.id) do %>
-                      <%= attachment_image_tag fire_engine, :image %>
+                      <%= attachment_image_tag fire_engine, :image, :fill, 200, 200, format: 'jpeg' %>
                     <% end %>
                   </div>
                 </div>

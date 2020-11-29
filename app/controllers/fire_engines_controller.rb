@@ -7,8 +7,12 @@ class FireEnginesController < ApplicationController
   def create
   	@fire_engine = FireEngine.new(fire_engine_params)
     @fire_engine.user_id = current_user.id
-    @fire_engine.save
-    redirect_to fire_engine_path(@fire_engine.id)
+    if @fire_engine.save
+      flash[:notice] = "successfully created."
+      redirect_to fire_engine_path(@fire_engine.id)
+    else
+      render :new
+    end
   end
 
   def index
@@ -18,6 +22,28 @@ class FireEnginesController < ApplicationController
   def show
   	@fire_engine = FireEngine.find(params[:id])
   	@post_comment = PostComment.new
+  end
+
+  def edit
+    @fire_engine = FireEngine.find(params[:id])
+  end
+
+  def update
+    @fire_engine = FireEngine.find(params[:id])
+    if @fire_engine.update(fire_engine_params)
+      flash[:notice] = "successfully created."
+      redirect_to fire_engine_path(@fire_engine.id)
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    @fire_engine = FireEngine.find(params[:id])
+    if @fire_engine.destroy
+      flash[:notice] = "successfully created."
+      redirect_to user_path(current_user)
+    end
   end
 
   private
