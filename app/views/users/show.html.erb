@@ -2,18 +2,19 @@
   <p><%= flash[:notice] %></p>
 <% end %>
 
-
 <h1>マイページ</h1>
 
 <div class="profile-container">
-  <h3 class="profile-name"><%= @user.name %></h3>
-  <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "no_image.png" %>
-  <% if @user.id == current_user.id %>
-    <p><%= link_to "プロフィール編集", edit_user_path(@user), class: "pull-right" %></p>
-  <% end %>
-</div>
+  <div class="col-lg-4">
+    <h3 class="profile-name"><%= @user.name %></h3>
+      <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "no_image.png" %>
+      <% if @user.id == current_user.id %>
+        <p><%= link_to "プロフィール編集", edit_user_path(@user), class: "pull-left" %></p>
+      <% end %>
+  </div>
 
-<div class="masonry-gutter"></div>
+      <div class="container">
+        <div class="col-lg-8">
           <% @fire_engines.each do |fire_engine| %>
             <div class="masonry-block">
               <div class="block block-image v1">
@@ -44,3 +45,4 @@
             </div>
           <% end %>
         </div>
+      </div>
