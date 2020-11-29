@@ -1,3 +1,7 @@
+<% if flash[:notice] %>
+  <p><%= flash[:notice] %></p>
+<% end %>
+
 <p>投稿詳細</p>
 
 
@@ -7,6 +11,14 @@
 
     <div class="post-content">
       <h2 class="post-title"><%= @fire_engine.fireengine_name %></h2>
+
+        <ul class="inline-meta">
+          <% if @fire_engine.user == current_user %>
+            <%= link_to "削除", fire_engine_path(@fire_engine), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+            <%= link_to "編集", edit_fire_engine_path(@fire_engine) %>
+          <% end %>
+        </ul>
+
       <ul class="meta-info-cells v4 float-wrapper">
         <li>
           <i class="fa fa-user"></i>By<a href="#">

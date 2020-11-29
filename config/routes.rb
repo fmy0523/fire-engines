@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   # ログイン後投稿一覧画面へ
   root 'fire_engines#index'
 
-  resources :fire_engines, only: [:new, :create, :index, :show] do
+  resources :fire_engines, only: [:new, :create, :index, :show, :destroy, :edit, :update] do
     resources :post_comments, only: [:create, :destroy]
   end
 
