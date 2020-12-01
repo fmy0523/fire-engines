@@ -25,6 +25,9 @@ class FireEnginesController < ApplicationController
   def show
   	@fire_engine = FireEngine.find(params[:id])
   	@post_comment = PostComment.new
+
+    # form_forに空のreportを渡す。
+    @report = Report.new
   end
 
   def edit
@@ -52,5 +55,9 @@ class FireEnginesController < ApplicationController
   private
   def fire_engine_params
     params.require(:fire_engine).permit(:fireengine_name, :image, :caption)
+  end
+
+  def user_params
+    params.require(:user).permit(:name, :profile_image_id)
   end
 end

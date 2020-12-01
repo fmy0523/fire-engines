@@ -67,4 +67,15 @@
       <%= f.submit "送信する", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
     <% end %>
 
-  </div>
+  <!-- ログインユーザーと投稿したユーザーが違う場合は、通報フォーム表示する -->
+  <% if @fire_engine.user != current_user %>
+    <%= form_for(@report, url: new_report_path) do |f| %>
+      <!-- 違反者と違反投稿を渡す -->
+      <%= f.hidden_field :user_id, :value => @fire_engine.user.id %>
+      <%= f.hidden_field :fire_engine_id, :value => @fire_engine.id %>
+
+    <%= f.submit '通報する', class: "btn btn-primary" %>
+    <% end %>
+  <% end %>
+
+</div>
