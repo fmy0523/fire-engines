@@ -2,48 +2,68 @@
   <p><%= flash[:notice] %></p>
 <% end %>
 
-<h1>マイページ</h1>
-
-<div class="profile-container">
-  <div class="col-lg-4">
-    <h3 class="profile-name"><%= @user.name %></h3>
-      <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "no_image.png" %>
-      <% if @user.id == current_user.id %>
-        <p><%= link_to "プロフィール編集", edit_user_path(@user), class: "pull-left" %></p>
-      <% end %>
+<div class="container">
+  <% if @user.id == current_user.id %>
+    <h2>マイページ</h2>
+  <% else %>
+    <h2>ユーザーページ</h2>
+  <% end %>
+  <div class="col-lg-3">
+    <%= attachment_image_tag @user, :profile_image, :fill, 150, 150, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "no_image.jpg" %>
+    <table class="table table-hover">
+      <tbody>
+        <tr>
+          <td><p>name</p></td>
+          <td><h3 class="profile-name"><%= @user.name %></h3></td>
+        </tr>
+      </tbody>
+    </table>
+    <% if @user.id == current_user.id %>
+      <td><p><%= link_to "プロフィール編集", edit_user_path(@user), class: "pull-left" %></p></td>
+    <% end %>
   </div>
 
   <div class="container">
-    <div class="col-lg-8">
-      <% @fire_engines.each do |fire_engine| %>
-        <div class="masonry-block">
-          <div class="block block-image v1">
-            <div class="block-image">
-              <div class="view view-first">
+    <div class="col-lg-9">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th><P>Image</P></th>
+            <th><P>Title</P></th>
+            <th><P>Caption</P></th>
+            <th><P>contributor</P></th>
+            <th><P>Comment</P></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @fire_engines.each do |fire_engine| %>
+            <tr class="new-table">
+              <td>
                 <%= link_to fire_engine_path(fire_engine.id) do %>
                   <%= attachment_image_tag fire_engine, :image, :fill, 200, 200, format: 'jpeg' %>
                 <% end %>
-              </div>
-            </div>
-
-            <div class="block-content">
-              <h3 class="block-title">
-                <%= link_to fire_engine_path(fire_engine.id) do %>
-                  <i class="fa fa-map-marker"></i><%= fire_engine.fireengine_name %>
-                <% end %>
-              </h3>
-
-              <p><%= fire_engine.caption %></p>
-              <ul class="inline-meta">
-                <li>By
-                  <%= fire_engine.user.name %>
-                </li>
-              </ul>
-            </div>
-
-          </div>
-        </div>
-      <% end %>
+              </td>
+              <td>
+                <h3 class="block-title">
+                  <%= link_to fire_engine_path(fire_engine.id) do %>
+                    <i class="fa fa-map-marker"></i><%= fire_engine.fireengine_name %>
+                  <% end %>
+                </h3>
+              </td>
+              <td>
+                <p><%= fire_engine.caption %></p>
+              </td>
+              <td>
+                <%= fire_engine.user.name %>
+              </td>
+              <td>
+                <%= link_to "#{fire_engine.post_comments.count} コメント", fire_engine_path(fire_engine.id) %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
     </div>
   </div>
+  <%= paginate @fire_engines %>
 </div>

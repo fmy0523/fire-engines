@@ -1,4 +1,6 @@
-<h2>通報内容入力画面</h2>
+<div class="container">
+  <h2>通報内容入力画面</h2>
+  <div class="row">
 
   <%= form_for(@report) do |f| %>
     <% if @report.errors.any? %>
@@ -25,3 +27,6 @@
     <%= f.submit '通報内容を送信する'%>
 
   <% end %>
+
+</div>
+</div>

@@ -1,5 +1,5 @@
-<p>新規投稿</p>
-
+<div class="container">
+<h3>新規投稿</h3>
   <%= form_for(@fire_engine, url: fire_engines_path) do |f| %>
     <% if @fire_engine.errors.any? %>
       <div id="error_explanation">
@@ -42,3 +42,4 @@
 
     <%= f.submit "送信", class:"btn btn-lg btn-block btn-base-1 mt-20" %>
   <% end %>
+</div>

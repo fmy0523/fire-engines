@@ -19,7 +19,9 @@
       <ul class="meta-info-cells v4 float-wrapper">
         <li>
           <i class="fa fa-user"></i>By<a href="#">
+          <%= link_to user_path(@fire_engine.user) do %>
             <%= @fire_engine.user.name %></a>
+          <% end %>
         </li>
         <li>
           <i class="fa fa-calendar"></i><%= @fire_engine.created_at.strftime('%Y/%m/%d') %>
@@ -44,16 +46,18 @@
                 <div class="comment-text">
                   <div class="comment-author clearfix">
                     <a href="#" class="link-author">
-                      <%= post_comment.user.name %>
+                      <%= link_to user_path(post_comment.user) do %>
+                        <%= post_comment.user.name %>
+                      <% end %>
                     </a>
-                    <!-- コメントの日付入れる -->
+                    <span class="comment-date"><%= post_comment.created_at.strftime('%Y/%m/%d') %></span>
                   </div>
                   <div class="comment-entry">
                     <%= post_comment.comment %>
                   </div>
                     <% if post_comment.user == current_user %>
                       <div>
-                        <%= link_to "削除", fire_engine_post_comment_path(post_comment.fire_engine, post_comment), method: :delete, class: "btn btn-danger pull-right" %>
+                        <%= link_to "削除", fire_engine_post_comment_path(post_comment.fire_engine, post_comment), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger pull-right" %>
                       </div>
                     <% end %>
                 </div>

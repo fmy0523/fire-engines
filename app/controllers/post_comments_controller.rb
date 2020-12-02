@@ -9,8 +9,10 @@ class PostCommentsController < ApplicationController
   end
 
   def destroy
-  	PostComment.find_by(id: params[:id], fire_engine_id: params[:fire_engine_id]).destroy
-    redirect_to fire_engine_path(params[:fire_engine_id])
+  	if PostComment.find_by(id: params[:id], fire_engine_id: params[:fire_engine_id]).destroy
+      flash[:notice] = "successfully created."
+      redirect_to fire_engine_path(params[:fire_engine_id])
+    end
   end
 
   private

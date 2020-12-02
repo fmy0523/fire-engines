@@ -2,44 +2,49 @@
   <p><%= flash[:notice] %></p>
 <% end %>
 
-<p>投稿一覧</p>
+<div class="container">
+  <h2>投稿一覧</h2>
+    <div class="row">
+      <div class="masonry-gutter"></div>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th><P>Image</P></th>
+            <th><P>Title</P></th>
+            <th><P>Caption</P></th>
+            <th><P>contributor</P></th>
+            <th><P>Comment</P></th>
+          </tr>
+        </thead>
 
-  <div class="masonry-gutter"></div>
-    <% @fire_engines.each do |fire_engine| %>
-      <div class="masonry-block">
-        <div class="block block-image v1">
-          <div class="block-image">
-            <div class="view view-first">
-              <%= link_to fire_engine_path(fire_engine.id) do %>
-                <%= attachment_image_tag fire_engine, :image, :fill, 200, 200, format: 'jpeg' %>
-              <% end %>
-            </div>
-          </div>
-
-          <div class="block-content">
-            <h3 class="block-title">
-              <%= link_to fire_engine_path(fire_engine.id) do %>
-                <i class="fa fa-map-marker"></i><%= fire_engine.fireengine_name %>
-              <% end %>
-            </h3>
-
-            <p><%= fire_engine.caption %></p>
-              <ul class="inline-meta">
-                <li>By
-                  <%= fire_engine.user.name %>
-                  <!-- コメントいいね機能実装後にプロフィール画像やる -->
-                  <!-- コメント件数の表示 -->
-                  <ul class="inline-meta">
-                    <li>
-                      <%= link_to "#{fire_engine.post_comments.count} コメント", fire_engine_path(fire_engine.id) %>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-          </div>
-
-        </div>
-      </div>
-    <% end %>
-  </div>
-<%= paginate @fire_engines %>
+        <tbody>
+          <% @fire_engines.each do |fire_engine| %>
+            <tr class="new-table">
+              <td>
+                <%= link_to fire_engine_path(fire_engine.id) do %>
+                  <%= attachment_image_tag fire_engine, :image, :fill, 200, 200, format: 'jpeg' %>
+                <% end %>
+              </td>
+              <td>
+                <h3 class="block-title">
+                  <%= link_to fire_engine_path(fire_engine.id) do %>
+                    <i class="fa fa-map-marker"></i><%= fire_engine.fireengine_name %>
+                  <% end %>
+                </h3>
+              </td>
+              <td>
+                <p><%= fire_engine.caption %></p>
+              </td>
+              <td>
+                <%= fire_engine.user.name %>
+              </td>
+              <td>
+                <%= link_to "#{fire_engine.post_comments.count} コメント", fire_engine_path(fire_engine.id) %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <%= paginate @fire_engines %>
+</div>

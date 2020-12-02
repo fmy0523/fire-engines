@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     resources :post_comments, only: [:create, :destroy]
   end
 
-  resources :users, only: [:show, :edit, :update]
+  resources :users, only: [:index, :show, :edit, :update]
 
   post 'reports/new' => 'reports#new'
   get 'report/complete' => 'reports#complete'
