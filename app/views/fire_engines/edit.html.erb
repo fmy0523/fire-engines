@@ -1,30 +1,29 @@
 <p>編集画面</p>
-<!-- form_for部分 -->
-<%= form_for(@fire_engine) do |f| %>
-  <% if @fire_engine.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= @fire_engine.errors.count %>件のエラーが発生しました。</h2>
-      <ul>
-      <% @fire_engine.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
+
+  <%= form_for(@fire_engine) do |f| %>
+    <% if @fire_engine.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= @fire_engine.errors.count %>件のエラーが発生しました。</h2>
+          <ul>
+            <% @fire_engine.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+      </div>
+    <% end %>
+
+    <h4>消防車名</h4>
+    <%= f.text_field :fireengine_name %>
+
+    <h4>説明</h4>
+    <%= f.text_field :caption %>
+
+    <h4>画像</h4>
+    <span><%= attachment_image_tag @fire_engine, :image, :fill, 200, 200, format: 'jpeg', fallback: "no_image.jpg" %></span>
+
+    <label class="control-label sr-only" for="inputEmail"></label>
+      <%= f.attachment_field :image, class: "user-edit-form" %>
+
+    <%= f.submit '保存' %>
+
   <% end %>
-
-  <h4>消防車名</h4>
-  <%= f.text_field :fireengine_name %>
-
-  <h4>説明</h4>
-  <%= f.text_field :caption %>
-
-  <h4>画像</h4>
-  <span><%= attachment_image_tag @fire_engine, :image, :fill, 200, 200, format: 'jpeg', fallback: "no_image.jpg" %></span>
-
-   <label class="control-label sr-only" for="inputEmail"></label>
-         <!-- attachment_fieldで、画像選択用のボタンを生成 -->
-         <%= f.attachment_field :image, class: "user-edit-form" %>
-
-  <%= f.submit '保存' %>
-
-<% end %>

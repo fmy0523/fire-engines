@@ -4,45 +4,42 @@
 
 <p>投稿一覧</p>
 
-<div class="masonry-gutter"></div>
-          <% @fire_engines.each do |fire_engine| %>
-            <div class="masonry-block">
-              <div class="block block-image v1">
-                <div class="block-image">
-                  <div class="view view-first">
-                  	<%= link_to fire_engine_path(fire_engine.id) do %>
-                      <%= attachment_image_tag fire_engine, :image, :fill, 200, 200, format: 'jpeg' %>
-                    <% end %>
-                  </div>
-                </div>
+  <div class="masonry-gutter"></div>
+    <% @fire_engines.each do |fire_engine| %>
+      <div class="masonry-block">
+        <div class="block block-image v1">
+          <div class="block-image">
+            <div class="view view-first">
+              <%= link_to fire_engine_path(fire_engine.id) do %>
+                <%= attachment_image_tag fire_engine, :image, :fill, 200, 200, format: 'jpeg' %>
+              <% end %>
+            </div>
+          </div>
 
-                <div class="block-content">
+          <div class="block-content">
+            <h3 class="block-title">
+              <%= link_to fire_engine_path(fire_engine.id) do %>
+                <i class="fa fa-map-marker"></i><%= fire_engine.fireengine_name %>
+              <% end %>
+            </h3>
 
-                  <h3 class="block-title">
-                    <%= link_to fire_engine_path(fire_engine.id) do %>
-                      <i class="fa fa-map-marker"></i><%= fire_engine.fireengine_name %>
-                    <% end %>
-                  </h3>
-
-                  <p><%= fire_engine.caption %></p>
+            <p><%= fire_engine.caption %></p>
+              <ul class="inline-meta">
+                <li>By
+                  <%= fire_engine.user.name %>
+                  <!-- コメントいいね機能実装後にプロフィール画像やる -->
+                  <!-- コメント件数の表示 -->
                   <ul class="inline-meta">
-                    <li>By
-                      <%= fire_engine.user.name %>
-                      <!-- コメントいいね機能実装後にプロフィール画像やる -->
-
-                      <!-- コメント件数の表示 -->
-                      <ul class="inline-meta">
-                        <li>
-                          <%= link_to "#{fire_engine.post_comments.count} コメント", fire_engine_path(fire_engine.id) %>
-                        </li>
-                      </ul>
-
-
+                    <li>
+                      <%= link_to "#{fire_engine.post_comments.count} コメント", fire_engine_path(fire_engine.id) %>
                     </li>
                   </ul>
-                </div>
-              </div>
-            </div>
-          <% end %>
+                </li>
+              </ul>
+          </div>
+
         </div>
-        <%= paginate @fire_engines %>
+      </div>
+    <% end %>
+  </div>
+<%= paginate @fire_engines %>
