@@ -3,6 +3,18 @@ class FireEnginesController < ApplicationController
   # ログインしていない状態でアクセスされた場合は、ログイン画面へリダイレクト
   before_action :authenticate_user!
 
+  def index
+    @fire_engines = FireEngine.page(params[:page]).reverse_order
+  end
+
+  def show
+    @fire_engine = FireEngine.find(params[:id])
+    @post_comment = PostComment.new
+
+    # form_forに空のreportを渡す。
+    @report = Report.new
+  end
+
   def new
   	@fire_engine = FireEngine.new
   end
@@ -16,18 +28,6 @@ class FireEnginesController < ApplicationController
     else
       render :new
     end
-  end
-
-  def index
-  	@fire_engines = FireEngine.page(params[:page]).reverse_order
-  end
-
-  def show
-  	@fire_engine = FireEngine.find(params[:id])
-  	@post_comment = PostComment.new
-
-    # form_forに空のreportを渡す。
-    @report = Report.new
   end
 
   def edit

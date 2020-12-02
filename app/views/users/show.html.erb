@@ -13,36 +13,37 @@
       <% end %>
   </div>
 
-      <div class="container">
-        <div class="col-lg-8">
-          <% @fire_engines.each do |fire_engine| %>
-            <div class="masonry-block">
-              <div class="block block-image v1">
-                <div class="block-image">
-                  <div class="view view-first">
-                  	<%= link_to fire_engine_path(fire_engine.id) do %>
-                      <%= attachment_image_tag fire_engine, :image, :fill, 200, 200, format: 'jpeg' %>
-                    <% end %>
-                  </div>
-                </div>
-
-                <div class="block-content">
-
-                  <h3 class="block-title">
-                    <%= link_to fire_engine_path(fire_engine.id) do %>
-                      <i class="fa fa-map-marker"></i><%= fire_engine.fireengine_name %>
-                    <% end %>
-                  </h3>
-
-                  <p><%= fire_engine.caption %></p>
-                  <ul class="inline-meta">
-                    <li>By
-                      <%= fire_engine.user.name %>
-                    </li>
-                  </ul>
-                </div>
+  <div class="container">
+    <div class="col-lg-8">
+      <% @fire_engines.each do |fire_engine| %>
+        <div class="masonry-block">
+          <div class="block block-image v1">
+            <div class="block-image">
+              <div class="view view-first">
+                <%= link_to fire_engine_path(fire_engine.id) do %>
+                  <%= attachment_image_tag fire_engine, :image, :fill, 200, 200, format: 'jpeg' %>
+                <% end %>
               </div>
             </div>
-          <% end %>
+
+            <div class="block-content">
+              <h3 class="block-title">
+                <%= link_to fire_engine_path(fire_engine.id) do %>
+                  <i class="fa fa-map-marker"></i><%= fire_engine.fireengine_name %>
+                <% end %>
+              </h3>
+
+              <p><%= fire_engine.caption %></p>
+              <ul class="inline-meta">
+                <li>By
+                  <%= fire_engine.user.name %>
+                </li>
+              </ul>
+            </div>
+
+          </div>
         </div>
-      </div>
+      <% end %>
+    </div>
+  </div>
+</div>

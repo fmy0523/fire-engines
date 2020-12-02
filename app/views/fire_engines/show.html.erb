@@ -4,20 +4,17 @@
 
 <p>投稿詳細</p>
 
-
-      <div class="post-image">
-        <%= attachment_image_tag @fire_engine, :image %>
-      </div>
-
-    <div class="post-content">
-      <h2 class="post-title"><%= @fire_engine.fireengine_name %></h2>
-
-        <ul class="inline-meta">
-          <% if @fire_engine.user == current_user %>
-            <%= link_to "削除", fire_engine_path(@fire_engine), method: :delete, "data-confirm" => "本当に削除しますか？" %>
-            <%= link_to "編集", edit_fire_engine_path(@fire_engine) %>
-          <% end %>
-        </ul>
+  <div class="post-image">
+    <%= attachment_image_tag @fire_engine, :image %>
+  </div>
+  <div class="post-content">
+    <h2 class="post-title"><%= @fire_engine.fireengine_name %></h2>
+      <ul class="inline-meta">
+        <% if @fire_engine.user == current_user %>
+          <%= link_to "削除", fire_engine_path(@fire_engine), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+          <%= link_to "編集", edit_fire_engine_path(@fire_engine) %>
+        <% end %>
+      </ul>
 
       <ul class="meta-info-cells v4 float-wrapper">
         <li>
@@ -39,43 +36,51 @@
         </div>
 
          <!-- コメント本文 -->
-     <ol>
-       <% @fire_engine.post_comments.each do |fire_engine| %>
-         <li class="comment">
-           <div class="comment-body bb">
-              <!-- ここにコメントしたユーザーのプロフィール画像を表示させる -->
-             <div class="comment-text">
-               <div class="comment-author clearfix">
-                 <a href="#" class="link-author"><%= fire_engine.user.name %></a>
-                   <!-- コメントの日付入れる -->
-               </div>
-               <div class="comment-entry"><%= fire_engine.comment %></div>
-               <!-- コメントしたものがログインユーザーのものであれば削除ボタンをここに表示 -->
-             　</div>
-           </div>
-         </li>
-       <% end %>
-     </ol>
+        <ol>
+          <% @fire_engine.post_comments.each do |post_comment| %>
+            <li class="comment">
+              <div class="comment-body bb">
+                  <!-- ここにコメントしたユーザーのプロフィール画像を表示させる -->
+                <div class="comment-text">
+                  <div class="comment-author clearfix">
+                    <a href="#" class="link-author">
+                      <%= post_comment.user.name %>
+                    </a>
+                    <!-- コメントの日付入れる -->
+                  </div>
+                  <div class="comment-entry">
+                    <%= post_comment.comment %>
+                  </div>
+                    <% if post_comment.user == current_user %>
+                      <div>
+                        <%= link_to "削除", fire_engine_post_comment_path(post_comment.fire_engine, post_comment), method: :delete, class: "btn btn-danger pull-right" %>
+                      </div>
+                    <% end %>
+                </div>
+              </div>
+            </li>
+          <% end %>
+        </ol>
 
-     <!-- コメント入力フォーム -->
-    <%= form_for [@fire_engine, @post_comment] do |f| %>
-      <div class="row">
-        <div class="col-sm-12">
-          <%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントをここに" %>
-        </div>
+        <!-- コメント入力フォーム -->
+        <%= form_for [@fire_engine, @post_comment] do |f| %>
+          <div class="row">
+            <div class="col-sm-12">
+              <%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントをここに" %>
+            </div>
+          </div>
+          <%= f.submit "送信する", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
+        <% end %>
+
+        <!-- ログインユーザーと投稿したユーザーが違う場合は、通報フォーム表示する -->
+        <% if @fire_engine.user != current_user %>
+          <%= form_for(@report, url: new_report_path) do |f| %>
+            <!-- 違反者と違反投稿を渡す -->
+            <%= f.hidden_field :user_id, :value => @fire_engine.user.id %>
+            <%= f.hidden_field :fire_engine_id, :value => @fire_engine.id %>
+
+            <%= f.submit '通報する', class: "btn btn-primary" %>
+          <% end %>
+        <% end %>
       </div>
-      <%= f.submit "送信する", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
-    <% end %>
-
-  <!-- ログインユーザーと投稿したユーザーが違う場合は、通報フォーム表示する -->
-  <% if @fire_engine.user != current_user %>
-    <%= form_for(@report, url: new_report_path) do |f| %>
-      <!-- 違反者と違反投稿を渡す -->
-      <%= f.hidden_field :user_id, :value => @fire_engine.user.id %>
-      <%= f.hidden_field :fire_engine_id, :value => @fire_engine.id %>
-
-    <%= f.submit '通報する', class: "btn btn-primary" %>
-    <% end %>
-  <% end %>
-
-</div>
+    </div>
