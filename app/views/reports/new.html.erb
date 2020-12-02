@@ -1,32 +1,28 @@
 <div class="container">
   <h2>通報内容入力画面</h2>
   <div class="row">
+    <%= form_for(@report) do |f| %>
+      <% if @report.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= @report.errors.count %>件のエラーが発生しました。</h2>
+          <ul>
+            <% @report.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
 
-  <%= form_for(@report) do |f| %>
-    <% if @report.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= @report.errors.count %>件のエラーが発生しました。</h2>
-        <ul>
-          <% @report.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-        </ul>
-      </div>
+      <h4>表題</h4>
+      <%= f.text_field :title %>
+
+      <h4>内容</h4>
+      <%= f.text_area :caption %>
+
+      <%= f.hidden_field :user_id %>
+      <%= f.hidden_field :fire_engine_id %>
+
+      <%= f.submit '通報内容を送信する'%>
     <% end %>
-
-    <h4>表題</h4>
-    <%= f.text_field :title %>
-
-    <h4>内容</h4>
-    <%= f.text_area :caption %>
-
-
-    <%= f.hidden_field :user_id %>
-    <%= f.hidden_field :fire_engine_id %>
-
-    <%= f.submit '通報内容を送信する'%>
-
-  <% end %>
-
-</div>
+  </div>
 </div>

@@ -5,7 +5,6 @@
 <div class="container">
   <h2>投稿一覧</h2>
     <div class="row">
-      <div class="masonry-gutter"></div>
       <table class="table table-striped">
         <thead>
           <tr>
@@ -26,9 +25,9 @@
                 <% end %>
               </td>
               <td>
-                <h3 class="block-title">
+                <h3>
                   <%= link_to fire_engine_path(fire_engine.id) do %>
-                    <i class="fa fa-map-marker"></i><%= fire_engine.fireengine_name %>
+                    <%= fire_engine.fireengine_name %>
                   <% end %>
                 </h3>
               </td>
