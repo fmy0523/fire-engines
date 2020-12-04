@@ -1,5 +1,17 @@
 class ReportsController < ApplicationController
 
+  before_action :admin_check, only: [:index, :show]
+
+# 以下管理者用
+  def index
+    @reports = Report.all
+  end
+
+  def show
+    @report = Report.find(params[:id])
+  end
+
+# 以下利用者用
   def new
   	# show.html.erbで値が入った＠orderを受け取り（params）
     @report = Report.new(report_params)
@@ -20,9 +32,17 @@ class ReportsController < ApplicationController
     end
   end
 
-  private
-   def report_params
-     params.require(:report).permit(:user_id, :fire_engine_id, :title, :caption)
-   end
+private
+  def report_params
+    params.require(:report).permit(:user_id, :fire_engine_id, :title, :caption)
+  end
 
+
+  def admin_check
+    # ログインユーザー且つ管理者の場合以外はtopへ飛ばす
+    unless user_signed_in? && current_user.admin?
+      redirect_to root_path
+    end
+
+  end
 end
