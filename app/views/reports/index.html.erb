@@ -1,0 +1,32 @@
+<p>通報一覧</p>
+<table class="table table-striped">
+  <thead>
+    <tr>
+     <th><P>通報日時</P></th>
+     <th><P>違反者ID</P></th>
+     <th><P>違反者</P></th>
+     <th><p>違反に関する内容（表題）</p></th>
+    </tr>
+  </thead>
+
+  <% @reports.each do |report| %>
+      <tr class="new-table">
+        <td>
+          <%= report.created_at.strftime('%Y/%m/%d') %>
+        </td>
+        <td>
+          <%= report.user_id %>
+        </td>
+        <td>
+          <%= report.user.name %>
+        </td>
+        <td>
+        	<!-- 詳細へのリンク -->
+          <%= link_to report_path(report.id) do %>
+            <%= report.title %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</div>

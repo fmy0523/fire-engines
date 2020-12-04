@@ -1,8 +1,5 @@
 class FireEnginesController < ApplicationController
 
-  # ログインしていない状態でアクセスされた場合は、ログイン画面へリダイレクト
-  before_action :authenticate_user!
-
   def index
     @fire_engines = FireEngine.page(params[:page]).reverse_order
   end

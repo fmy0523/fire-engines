@@ -1,7 +1,5 @@
 class UsersController < ApplicationController
 
-  # ログインしていない状態でアクセスされた場合は、ログイン画面へリダイレクト
-  before_action :authenticate_user!, only: [:show]
   before_action :correct_user, only: [:edit, :update]
 
 
@@ -34,8 +32,8 @@ class UsersController < ApplicationController
     params.require(:user).permit(:name, :profile_image)
   end
 
-# ログインしていない場合にユーザー関連のURLにアクセスできず、ログイン画面に飛ばす
-   def correct_user
+
+  def correct_user
     user = User.find(params[:id])
      if current_user != user
       redirect_to new_user_session_path
