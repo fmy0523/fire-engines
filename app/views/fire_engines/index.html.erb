@@ -3,47 +3,46 @@
 <% end %>
 
 <div class="container">
-  <h2>投稿一覧</h2>
-    <div class="row">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th><P>Image</P></th>
-            <th><P>Title</P></th>
-            <th><P>Caption</P></th>
-            <th><P>contributor</P></th>
-            <th><P>Comment</P></th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <% @fire_engines.each do |fire_engine| %>
-            <tr class="new-table">
-              <td>
+  <h2>Fire engines</h2>
+  <div class="row">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th><P>Image</P></th>
+          <th><P>Title</P></th>
+          <th><P>Caption</P></th>
+          <th><P>contributor</P></th>
+          <th><P>Comment</P></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @fire_engines.each do |fire_engine| %>
+          <tr class="new-table">
+            <td>
+              <%= link_to fire_engine_path(fire_engine.id) do %>
+                <%= attachment_image_tag fire_engine, :image, :fill, 200, 200, format: 'jpeg' %>
+              <% end %>
+            </td>
+            <td>
+              <h3>
                 <%= link_to fire_engine_path(fire_engine.id) do %>
-                  <%= attachment_image_tag fire_engine, :image, :fill, 200, 200, format: 'jpeg' %>
+                  <%= fire_engine.fireengine_name %>
                 <% end %>
-              </td>
-              <td>
-                <h3>
-                  <%= link_to fire_engine_path(fire_engine.id) do %>
-                    <%= fire_engine.fireengine_name %>
-                  <% end %>
-                </h3>
-              </td>
-              <td>
-                <p><%= fire_engine.caption %></p>
-              </td>
-              <td>
-                <%= fire_engine.user.name %>
-              </td>
-              <td>
-                <%= link_to "#{fire_engine.post_comments.count} コメント", fire_engine_path(fire_engine.id) %>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
-    <%= paginate @fire_engines %>
+              </h3>
+            </td>
+            <td>
+              <p><%= fire_engine.caption %></p>
+            </td>
+            <td>
+              <%= fire_engine.user.name %>
+            </td>
+            <td>
+              <%= link_to "#{fire_engine.post_comments.count} コメント", fire_engine_path(fire_engine.id) %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <%= paginate @fire_engines %>
 </div>

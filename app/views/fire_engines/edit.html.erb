@@ -1,5 +1,5 @@
 <div class="container">
-  <p>編集画面</p>
+  <h2>投稿内容編集</h2>
   <div class="row">
     <%= form_for(@fire_engine) do |f| %>
       <% if @fire_engine.errors.any? %>
@@ -25,7 +25,6 @@
       <%= f.attachment_field :image, class: "user-edit-form" %>
 
       <%= f.submit '保存' %>
-
     <% end %>
   </div>
 </div>

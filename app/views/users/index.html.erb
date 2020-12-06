@@ -17,13 +17,15 @@
           <% @users.each do |user| %>
             <tr class="new-table">
               <td>
-                <span><%= attachment_image_tag user, :profile_image, :fill, 85, 85, format: 'jpeg', fallback: "no_image.jpg" %></span>
+                <span><%= attachment_image_tag user, :profile_image, :fill, 85, 85, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "no_image.jpg" %></span>
               </td>
               <td>
                 <%= user.name %>
               </td>
               <td>
-                <%= link_to "Show", user %>
+                <button type="button" class="btn btn-default">
+                  <%= link_to "Show", user %>
+                </button>
               </td>
             </tr>
           <% end %>
