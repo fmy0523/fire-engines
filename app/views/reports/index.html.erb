@@ -1,4 +1,4 @@
-<p>通報一覧</p>
+<h2>通報一覧</h2>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -21,7 +21,6 @@
           <%= report.user.name %>
         </td>
         <td>
-        	<!-- 詳細へのリンク -->
           <%= link_to report_path(report.id) do %>
             <%= report.title %>
           <% end %>

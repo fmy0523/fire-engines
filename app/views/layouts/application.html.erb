@@ -9,103 +9,98 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
 　　<!-- ヘッダー -->
-
-<div class="container">
-  <div class="row header">
-    <nav class="navbar">
+    <nav class="navbar  navbar-inverse">
       <div class="col-lg-4">
-        <h4>Fire engines</h4>
+        <a class="navbar-brand" href="#">Fire engines</a>
           <% if user_signed_in? && current_user.admin? %>
-            <p>管理者でログインしています。</p>
+            <a class="navbar-brand" href="#">管理者でログインしています。</a>
           <% end %>
       </div>
       <div class="col-lg-8">
         <div id="slidemenu">
           <ul class="nav navbar-nav navbar-right" data-hover="dropdown" data-animations="zoomIn fadeIn fadeInUp fadeIn">
-                <!-- ログイン済みの場合 -->
-                <% if user_signed_in? %>
-                  <!-- ログイン済み且つ管理者の場合、通報一覧のリンクを表示 -->
-                  <% if current_user.admin? %>
-                    <li>
-                      <%= link_to reports_path do %>
-                      <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
-                      通報一覧
-                      <% end %>
-                    </li>
+            <!-- ログイン済みの場合 -->
+            <% if user_signed_in? %>
+            <!-- ログイン済み且つ管理者の場合、通報一覧のリンクを表示 -->
+              <% if current_user.admin? %>
+                <li>
+                  <%= link_to reports_path do %>
+                    <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+                    通報一覧
                   <% end %>
+                </li>
+              <% end %>
 
-                  <li>
-                    <%= link_to user_path(current_user) do %>
+                <li>
+                  <%= link_to user_path(current_user) do %>
                     <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
-                    マイページ
-                    <% end %>
-                  </li>
+                    My page
+                  <% end %>
+                </li>
 
-                  <li>
-                    <%= link_to users_path do %>
+                <li>
+                  <%= link_to users_path do %>
                     <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                     Users
-                    <% end %>
-                  </li>
+                  <% end %>
+                </li>
 
-                  <li>
-                    <%= link_to fire_engines_path do %>
-                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                    投稿一覧
-                    <% end %>
-                  </li>
+                <li>
+                  <%= link_to fire_engines_path do %>
+                    <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                    Fire engines
+                  <% end %>
+                </li>
 
-                  <li>
-                    <%= link_to new_fire_engine_path do %>
-                    <span class="glyphicon glyphicon-book" aria-hidden="true"></span>
-                    新規投稿
-                    <% end %>
-                  </li>
+                <li>
+                  <%= link_to new_fire_engine_path do %>
+                    <span class="glyphicon glyphicon-picture" aria-hidden="true"></span>
+                    New post
+                  <% end %>
+                </li>
 
-                  <li>
-                    <%= link_to destroy_user_session_path, method: :delete do %>
+                <li>
+                  <%= link_to destroy_user_session_path, method: :delete do %>
                     <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
-                    logout
-                    <% end %>
-                  </li>
+                    Log out
+                  <% end %>
+                </li>
 
-                <% else %>
-                   <!-- ログインしていない場合 -->
-                  <li>
-                    <%= link_to root_path do %>
+            <% else %>
+                <!-- ログインしていない場合 -->
+                <li>
+                  <%= link_to root_path do %>
                     <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
                     Home
-                    <% end %>
-                  </li>
+                  <% end %>
+                </li>
 
-                   <li>
-                    <%= link_to home_about_path do %>
+                <li>
+                  <%= link_to home_about_path do %>
                     <span class="glyphicon glyphicon-link" aria-hidden="true"></span>
                     About
-                    <% end %>
-                  </li>
+                  <% end %>
+                </li>
 
-                  <li>
-                    <%= link_to new_user_registration_path do %>
+                <li>
+                  <%= link_to new_user_registration_path do %>
                     <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                    sign up
-                    <% end %>
-                  </li>
+                    Sign up
+                  <% end %>
+                </li>
 
-                  <li>
-                    <%= link_to new_user_session_path do %>
+                <li>
+                  <%= link_to new_user_session_path do %>
                     <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
-                    login
-                    <% end %>
-                  </li>
+                    Log in
+                  <% end %>
+                </li>
 
-                <% end %>
-             </ul>
-         </div>
-       </div>
-       </nav>
-    </div>
-</div>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </nav>
 
 <body>
  <%= yield %>
