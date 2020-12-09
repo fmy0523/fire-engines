@@ -13,9 +13,14 @@
         </div>
       <% end %>
 
+      <h4>name</h4>
       <div class="form-group has-icon">
         <%= f.text_field :name, autofocus: true, class:"form-control", id:"inputEmail", placeholder:"名前"%>
       </div>
+
+      <h4>introduction</h4>
+       <%= f.text_area :introduction, autofocus: true, class:"form-control", id:"inputEmail", placeholder:"名前"%>
+
       <div class="form-group has-icon">
         <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg"%>
         <%= f.attachment_field :profile_image, placeholder: "プロフィール画像" %>
