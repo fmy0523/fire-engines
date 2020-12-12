@@ -3,6 +3,7 @@ lock "~> 3.14.1"
 
 set :application, "fireengine"
 set :repo_url, "https://github.com/fmy0523/fireengine.git"
+set :branch, 'main'
 
 set :deploy_to, "/home/ec2-user/fireengine"
 set :rbenv_ruby, '2.5.7'
